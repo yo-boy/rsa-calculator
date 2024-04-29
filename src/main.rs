@@ -1,6 +1,14 @@
+use std::io::{self, Write};
+
 fn main() {
     println!("RSA program");
-    let number: u64 = 751;
+    print!("Enter a number: ");
+    io::stdout().flush().expect("couldn't write to terminal");
+    let mut input_line = String::new();
+    io::stdin()
+        .read_line(&mut input_line)
+        .expect("Failed to read line");
+    let number: u64 = input_line.trim().parse().expect("Input not an integer");
     let p = calculate_p(number).expect("P doesn't exist for given N");
     let q = calculate_q(number);
     println!("number = {}\np = {}\nq = {}", number, p, q);
